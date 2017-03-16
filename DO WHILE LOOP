@@ -1,1 +1,14 @@
+`DECLARE @LoopCursor INT = 1 -- STARTS AT 1
+DECLARE @LoopCursorMax INT = 10-- ENDS AT 1080
 
+WHILE (@LoopCursor < = @LoopCursorMax) 
+BEGIN
+	PRINT @LoopCursor
+	SET @LoopCursor =@LoopCursor + 1
+	insert into [dbo].[Tracking] (TrackingAction,PrimaryKeyField,PrimaryKeyValue, CreateDate, UpdateDate, DeleteDate)
+		values ('Updated', 'TransientKey', @LoopCursor, getdate(),null, null)
+	IF @LoopCursor > @LoopCursorMax
+	BREAK
+	ELSE
+	CONTINUE
+END`
